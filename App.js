@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+
+import * as React from 'react';
+import { WebView } from 'react-native-webview';
 
 export default function App() {
+  const jsCode = `
+      function downloadFile(obj){
+        alert("hello")
+        const buttonContainer = document.getElementsByClassName('wrapper');
+        buttonContainer[0].children[1].onclick = function(){alert('hello')}
+      }
+
+      downloadFile()
+
+  `;
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <WebView
+      style={{ flex: 1 }}
+      originWhitelist={['*']}
+      source={{ uri: 'https://blob-download-study-frontend.vercel.app/' }}
+      forceDarkOn
+      incognito
+      javaScriptEnabledAndroid={true}
+      injectedJavaScript={jsCode}
+    />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
