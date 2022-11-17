@@ -71,7 +71,7 @@ export default function App() {
       source={{ uri: 'https://blob-download-study-frontend.vercel.app/' }}
       onMessage={(event) => {
         setId(event.nativeEvent.data);
-        getPdfFile(1);
+        getPdfFile(id);
         handleDowloadAndroid();
       }}
       javaScriptEnabledAndroid={true}
